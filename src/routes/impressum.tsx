@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/legal-page";
+import { useBrand } from "@/components/brand-provider";
 
 export const Route = createFileRoute("/impressum")({
   head: () => ({
@@ -10,17 +11,25 @@ export const Route = createFileRoute("/impressum")({
       { property: "og:url", content: "/impressum" },
     ],
   }),
-  component: () => (
-    <LegalPage title="Impressum" description="Angaben gemäß § 5 TMG.">
-      <p>Dies ist ein Platzhalter-Impressum. Bitte ersetzen durch die tatsächlichen Angaben.</p>
-      <h2>Anbieter</h2>
-      <p>Mistudia<br />Musterstraße 1<br />12345 Musterstadt</p>
-      <h2>Kontakt</h2>
-      <p>E-Mail: kontakt@mistudia.de</p>
-      <h2>Verantwortlich für den Inhalt</h2>
-      <p>Max Mustermann, Anschrift wie oben.</p>
-      <h2>Haftungsausschluss</h2>
-      <p>Platzhalter-Text. Wird durch juristisch geprüfte Inhalte ersetzt.</p>
-    </LegalPage>
-  ),
+  component: Page,
 });
+
+function Page() {
+  const brand = useBrand();
+  return (
+    <LegalPage title="Impressum" description="Angaben gemäß § 5 TMG.">
+      <h2>Anbieter</h2>
+      <p>{brand.imprint.providerName}<br />{brand.address.street}<br />{brand.address.postalCode} {brand.address.city}</p>
+      <h2>Kontakt</h2>
+      <p>E-Mail: {brand.email}</p>
+      <h2>Verantwortlich für den Inhalt</h2>
+      <p>{brand.imprint.responsiblePerson}, Anschrift wie oben.</p>
+      {brand.imprint.disclaimer && (
+        <>
+          <h2>Haftungsausschluss</h2>
+          <p>{brand.imprint.disclaimer}</p>
+        </>
+      )}
+    </LegalPage>
+  );
+}

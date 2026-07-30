@@ -1,27 +1,28 @@
 import { Link } from "@tanstack/react-router";
 import { Mail } from "lucide-react";
-import logoAsset from "@/assets/logo.png.asset.json";
+import { useBrand } from "@/components/brand-provider";
 
 export function SiteFooter() {
+  const brand = useBrand();
   return (
     <footer className="mt-24 border-t border-border bg-muted/40">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div>
           <Link to="/" className="flex items-center">
-            <img
-              src={logoAsset.url}
-              alt="Mistudia Logo"
-              className="h-10 w-auto"
-              width="200"
-              height="60"
-            />
+            {brand.logo.src ? (
+              <img src={brand.logo.src} alt={brand.logo.alt} className="h-10 w-auto" width="200" height="60" />
+            ) : (
+              <span className="text-lg font-semibold text-foreground">{brand.name}</span>
+            )}
           </Link>
           <p className="mt-3 text-sm text-muted-foreground">
             Professionelle Online-Nachhilfe für Schülerinnen und Schüler jeden Alters.
           </p>
-          <a href="mailto:kontakt@mistudia.de" className="mt-4 inline-flex items-center gap-2 text-sm text-primary hover:underline">
-            <Mail className="h-4 w-4" /> kontakt@mistudia.de
-          </a>
+          {brand.email && (
+            <a href={`mailto:${brand.email}`} className="mt-4 inline-flex items-center gap-2 text-sm text-primary hover:underline">
+              <Mail className="h-4 w-4" /> {brand.email}
+            </a>
+          )}
         </div>
 
         <div>
@@ -54,7 +55,7 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-muted-foreground sm:flex-row sm:px-6 lg:px-8">
-          <p>© {new Date().getFullYear()} Mistudia. Alle Rechte vorbehalten.</p>
+          <p>© {new Date().getFullYear()} {brand.name}. Alle Rechte vorbehalten.</p>
           <p>Mit ♥ gemacht für neugierige Köpfe.</p>
         </div>
       </div>

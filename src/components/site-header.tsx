@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logoAsset from "@/assets/logo.png.asset.json";
+import { useBrand } from "@/components/brand-provider";
 
 const subjects = [
   { name: "Mathematik", to: "/faecher/mathematik" },
@@ -23,6 +23,7 @@ const links = [
 ];
 
 export function SiteHeader() {
+  const brand = useBrand();
   const [open, setOpen] = useState(false);
   const [subjectsOpen, setSubjectsOpen] = useState(false);
 
@@ -30,13 +31,11 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link to="/" className="flex items-center">
-          <img
-            src={logoAsset.url}
-            alt="Mistudia Logo"
-            className="h-10 w-auto sm:h-11"
-            width="200"
-            height="60"
-          />
+          {brand.logo.src ? (
+            <img src={brand.logo.src} alt={brand.logo.alt} className="h-10 w-auto sm:h-11" width="200" height="60" />
+          ) : (
+            <span className="text-lg font-semibold text-foreground">{brand.name}</span>
+          )}
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">

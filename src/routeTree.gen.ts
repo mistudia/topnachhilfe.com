@@ -9,57 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
-import { Route as TerminBuchenRouteImport } from './routes/termin-buchen'
-import { Route as PreiseRouteImport } from './routes/preise'
-import { Route as KontaktRouteImport } from './routes/kontakt'
-import { Route as ImpressumRouteImport } from './routes/impressum'
-import { Route as DatenschutzRouteImport } from './routes/datenschutz'
-import { Route as AppsRouteImport } from './routes/apps'
-import { Route as AnimechsRouteImport } from './routes/animechs'
-import { Route as AgbRouteImport } from './routes/agb'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AgbRouteImport } from './routes/agb'
+import { Route as AnimechsRouteImport } from './routes/animechs'
+import { Route as AppsRouteImport } from './routes/apps'
+import { Route as DatenschutzRouteImport } from './routes/datenschutz'
+import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as PreiseRouteImport } from './routes/preise'
+import { Route as TerminBuchenRouteImport } from './routes/termin-buchen'
+import { Route as UeberUnsRouteImport } from './routes/ueber-uns'
 import { Route as FaecherIndexRouteImport } from './routes/faecher.index'
 import { Route as FaecherSubjectRouteImport } from './routes/faecher.$subject'
 
-const UeberUnsRoute = UeberUnsRouteImport.update({
-  id: '/ueber-uns',
-  path: '/ueber-uns',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TerminBuchenRoute = TerminBuchenRouteImport.update({
-  id: '/termin-buchen',
-  path: '/termin-buchen',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PreiseRoute = PreiseRouteImport.update({
-  id: '/preise',
-  path: '/preise',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KontaktRoute = KontaktRouteImport.update({
-  id: '/kontakt',
-  path: '/kontakt',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ImpressumRoute = ImpressumRouteImport.update({
-  id: '/impressum',
-  path: '/impressum',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DatenschutzRoute = DatenschutzRouteImport.update({
-  id: '/datenschutz',
-  path: '/datenschutz',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AppsRoute = AppsRouteImport.update({
-  id: '/apps',
-  path: '/apps',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AnimechsRoute = AnimechsRouteImport.update({
-  id: '/animechs',
-  path: '/animechs',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AgbRoute = AgbRouteImport.update({
@@ -67,9 +32,44 @@ const AgbRoute = AgbRouteImport.update({
   path: '/agb',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AnimechsRoute = AnimechsRouteImport.update({
+  id: '/animechs',
+  path: '/animechs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppsRoute = AppsRouteImport.update({
+  id: '/apps',
+  path: '/apps',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatenschutzRoute = DatenschutzRouteImport.update({
+  id: '/datenschutz',
+  path: '/datenschutz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpressumRoute = ImpressumRouteImport.update({
+  id: '/impressum',
+  path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontaktRoute = KontaktRouteImport.update({
+  id: '/kontakt',
+  path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PreiseRoute = PreiseRouteImport.update({
+  id: '/preise',
+  path: '/preise',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TerminBuchenRoute = TerminBuchenRouteImport.update({
+  id: '/termin-buchen',
+  path: '/termin-buchen',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UeberUnsRoute = UeberUnsRouteImport.update({
+  id: '/ueber-uns',
+  path: '/ueber-uns',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaecherIndexRoute = FaecherIndexRouteImport.update({
@@ -188,60 +188,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/ueber-uns': {
-      id: '/ueber-uns'
-      path: '/ueber-uns'
-      fullPath: '/ueber-uns'
-      preLoaderRoute: typeof UeberUnsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/termin-buchen': {
-      id: '/termin-buchen'
-      path: '/termin-buchen'
-      fullPath: '/termin-buchen'
-      preLoaderRoute: typeof TerminBuchenRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/preise': {
-      id: '/preise'
-      path: '/preise'
-      fullPath: '/preise'
-      preLoaderRoute: typeof PreiseRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/kontakt': {
-      id: '/kontakt'
-      path: '/kontakt'
-      fullPath: '/kontakt'
-      preLoaderRoute: typeof KontaktRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/impressum': {
-      id: '/impressum'
-      path: '/impressum'
-      fullPath: '/impressum'
-      preLoaderRoute: typeof ImpressumRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/datenschutz': {
-      id: '/datenschutz'
-      path: '/datenschutz'
-      fullPath: '/datenschutz'
-      preLoaderRoute: typeof DatenschutzRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/apps': {
-      id: '/apps'
-      path: '/apps'
-      fullPath: '/apps'
-      preLoaderRoute: typeof AppsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/animechs': {
-      id: '/animechs'
-      path: '/animechs'
-      fullPath: '/animechs'
-      preLoaderRoute: typeof AnimechsRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/agb': {
@@ -251,11 +202,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AgbRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/animechs': {
+      id: '/animechs'
+      path: '/animechs'
+      fullPath: '/animechs'
+      preLoaderRoute: typeof AnimechsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apps': {
+      id: '/apps'
+      path: '/apps'
+      fullPath: '/apps'
+      preLoaderRoute: typeof AppsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/datenschutz': {
+      id: '/datenschutz'
+      path: '/datenschutz'
+      fullPath: '/datenschutz'
+      preLoaderRoute: typeof DatenschutzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impressum': {
+      id: '/impressum'
+      path: '/impressum'
+      fullPath: '/impressum'
+      preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontakt': {
+      id: '/kontakt'
+      path: '/kontakt'
+      fullPath: '/kontakt'
+      preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/preise': {
+      id: '/preise'
+      path: '/preise'
+      fullPath: '/preise'
+      preLoaderRoute: typeof PreiseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/termin-buchen': {
+      id: '/termin-buchen'
+      path: '/termin-buchen'
+      fullPath: '/termin-buchen'
+      preLoaderRoute: typeof TerminBuchenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ueber-uns': {
+      id: '/ueber-uns'
+      path: '/ueber-uns'
+      fullPath: '/ueber-uns'
+      preLoaderRoute: typeof UeberUnsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faecher/': {

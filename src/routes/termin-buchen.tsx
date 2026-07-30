@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useBrand } from "@/components/brand-provider";
 import { CheckCircle2, CalendarCheck } from "lucide-react";
 
 export const Route = createFileRoute("/termin-buchen")({
@@ -22,6 +23,7 @@ export const Route = createFileRoute("/termin-buchen")({
 });
 
 function Page() {
+  const brand = useBrand();
   const [sent, setSent] = useState(false);
   return (
     <SiteLayout>
@@ -107,7 +109,7 @@ function Page() {
             <div className="rounded-2xl border border-border bg-muted/40 p-6">
               <h3 className="font-semibold">Direkter Kontakt</h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                Lieber schreiben? Erreiche uns unter <a href="mailto:kontakt@mistudia.de" className="text-primary hover:underline">kontakt@mistudia.de</a>.
+                Lieber schreiben? Erreiche uns unter <a href={`mailto:${brand.email}`} className="text-primary hover:underline">{brand.email}</a>.
               </p>
             </div>
           </div>

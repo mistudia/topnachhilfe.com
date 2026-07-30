@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/legal-page";
+import { useBrand } from "@/components/brand-provider";
 
 export const Route = createFileRoute("/datenschutz")({
   head: () => ({
@@ -10,15 +11,17 @@ export const Route = createFileRoute("/datenschutz")({
       { property: "og:url", content: "/datenschutz" },
     ],
   }),
-  component: () => (
-    <LegalPage title="Datenschutzerklärung" description="Platzhalter – wird durch juristisch geprüften Text ersetzt.">
-      <p>Diese Datenschutzerklärung ist ein Platzhalter. Sie wird zu einem späteren Zeitpunkt durch eine vollständige, rechtssichere Version ersetzt.</p>
-      <h2>1. Verantwortlicher</h2>
-      <p>Mistudia, Musterstraße 1, 12345 Musterstadt, kontakt@mistudia.de.</p>
-      <h2>2. Erhebung personenbezogener Daten</h2>
-      <p>Platzhalter-Text.</p>
-      <h2>3. Ihre Rechte</h2>
-      <p>Platzhalter-Text.</p>
-    </LegalPage>
-  ),
+  component: Page,
 });
+
+function Page() {
+  const brand = useBrand();
+  return (
+    <LegalPage title="Datenschutzerklärung" description="Informationen zur Verarbeitung personenbezogener Daten.">
+      <h2>1. Verantwortlicher</h2>
+      <p>{brand.privacy.controller}</p>
+      <h2>Kontakt</h2>
+      <p>E-Mail: {brand.privacy.contactEmail}</p>
+    </LegalPage>
+  );
+}

@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useBrand } from "@/components/brand-provider";
 
 export function CookieBanner() {
+  const brand = useBrand();
   const [visible, setVisible] = useState(false);
+  const storageKey = `${brand.id}-cookie-consent`;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (!localStorage.getItem("mistudia-cookie-consent")) {
+    if (!localStorage.getItem(storageKey)) {
       setVisible(true);
     }
-  }, []);
+  }, [storageKey]);
 
   const decide = (value: "accepted" | "declined") => {
-    localStorage.setItem("mistudia-cookie-consent", value);
+    localStorage.setItem(storageKey, value);
     setVisible(false);
   };
 

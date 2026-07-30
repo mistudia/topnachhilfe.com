@@ -11,6 +11,10 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { BrandProvider } from "@/components/brand-provider";
+import { defaultBrand } from "@/lib/brand";
+
+const globalBrand = defaultBrand;
 
 function NotFoundComponent() {
   return (
@@ -73,31 +77,44 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
+  head: () => {
+    const meta = [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Mistudia – Professionelle Online-Nachhilfe für jede Altersgruppe" },
-      { name: "description", content: "Online-Nachhilfe in Mathematik, Physik, Spanisch, Deutsch und Englisch. Maßgeschneiderte Lernpläne, erfahrene Tutoren und eigene Lern-Apps." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Mistudia – Professionelle Online-Nachhilfe für jede Altersgruppe" },
-      { property: "og:description", content: "Online-Nachhilfe in Mathematik, Physik, Spanisch, Deutsch und Englisch. Maßgeschneiderte Lernpläne, erfahrene Tutoren und eigene Lern-Apps." },
+      { title: globalBrand.seo.title },
+      { name: "description", content: globalBrand.seo.description },
+      { name: "author", content: globalBrand.legalName },
+      { property: "og:title", content: globalBrand.seo.title },
+      { property: "og:description", content: globalBrand.seo.description },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: globalBrand.seo.canonicalUrl },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Mistudia – Professionelle Online-Nachhilfe für jede Altersgruppe" },
-      { name: "twitter:description", content: "Online-Nachhilfe in Mathematik, Physik, Spanisch, Deutsch und Englisch. Maßgeschneiderte Lernpläne, erfahrene Tutoren und eigene Lern-Apps." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/47ed5438-8df2-42d6-8c94-3033f680af4e/id-preview-d282b903--76a13fb5-6d99-4469-a0d7-fe268679096d.lovable.app-1785184368319.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/47ed5438-8df2-42d6-8c94-3033f680af4e/id-preview-d282b903--76a13fb5-6d99-4469-a0d7-fe268679096d.lovable.app-1785184368319.png" },
-    ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
-    ],
-  }),
+      { name: "twitter:title", content: globalBrand.seo.title },
+      { name: "twitter:description", content: globalBrand.seo.description },
+    ];
+
+    if (globalBrand.seo.ogImage) {
+      meta.push(
+        { property: "og:image", content: globalBrand.seo.ogImage },
+        { name: "twitter:image", content: globalBrand.seo.ogImage },
+      );
+    }
+
+    if (globalBrand.seo.twitterHandle) {
+      meta.push({ name: "twitter:site", content: globalBrand.seo.twitterHandle });
+    }
+
+    return {
+      meta,
+      links: [
+        {
+          rel: "stylesheet",
+          href: appCss,
+        },
+        { rel: "icon", href: globalBrand.favicon, type: "image/x-icon" },
+      ],
+    };
+  },
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
@@ -123,8 +140,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <BrandProvider>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </BrandProvider>
     </QueryClientProvider>
   );
 }

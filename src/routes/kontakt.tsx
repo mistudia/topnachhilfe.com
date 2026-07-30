@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useBrand } from "@/components/brand-provider";
 import { Mail, Phone, MapPin, CheckCircle2 } from "lucide-react";
 
 export const Route = createFileRoute("/kontakt")({
@@ -22,6 +23,7 @@ export const Route = createFileRoute("/kontakt")({
 });
 
 function Page() {
+  const brand = useBrand();
   const [sent, setSent] = useState(false);
   return (
     <SiteLayout>
@@ -37,21 +39,21 @@ function Page() {
               <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground"><Mail className="h-5 w-5" /></span>
               <div>
                 <p className="text-sm font-semibold">E-Mail</p>
-                <a href="mailto:kontakt@mistudia.de" className="text-primary hover:underline">kontakt@mistudia.de</a>
+                <a href={`mailto:${brand.email}`} className="text-primary hover:underline">{brand.email}</a>
               </div>
             </div>
             <div className="flex items-start gap-4">
               <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground"><Phone className="h-5 w-5" /></span>
               <div>
                 <p className="text-sm font-semibold">Telefon</p>
-                <p className="text-muted-foreground">+49 (0) 000 000 000</p>
+                <p className="text-muted-foreground">{brand.phone}</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
               <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground"><MapPin className="h-5 w-5" /></span>
               <div>
                 <p className="text-sm font-semibold">Standort</p>
-                <p className="text-muted-foreground">100 % online – deutschlandweit</p>
+                <p className="text-muted-foreground">{brand.address.label}</p>
               </div>
             </div>
             <div className="rounded-2xl border border-border bg-muted/40 p-6">
