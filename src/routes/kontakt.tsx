@@ -13,9 +13,16 @@ export const Route = createFileRoute("/kontakt")({
   head: () => ({
     meta: [
       { title: "Kontakt – Mistudia" },
-      { name: "description", content: "Kontaktiere Mistudia für Nachhilfe-Anfragen, Kooperationen oder Rückfragen." },
+      {
+        name: "description",
+        content:
+          "Kontaktiere Mistudia für Nachhilfe-Anfragen, Kooperationen oder Rückfragen.",
+      },
       { property: "og:title", content: "Kontakt – Mistudia" },
-      { property: "og:description", content: "So erreichst du das Team von Mistudia." },
+      {
+        property: "og:description",
+        content: "So erreichst du das Team von Mistudia.",
+      },
       { property: "og:url", content: "/kontakt" },
     ],
   }),
@@ -36,21 +43,37 @@ function Page() {
         <div className="grid gap-10 lg:grid-cols-[1fr_1fr]">
           <div className="space-y-6">
             <div className="flex items-start gap-4">
-              <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground"><Mail className="h-5 w-5" /></span>
+              <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground">
+                <Mail className="h-5 w-5" />
+              </span>
               <div>
                 <p className="text-sm font-semibold">E-Mail</p>
-                <a href={`mailto:${brand.email}`} className="text-primary hover:underline">{brand.email}</a>
+                <a
+                  href={`mailto:${brand.email}`}
+                  className="text-primary hover:underline"
+                >
+                  {brand.email}
+                </a>
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground"><Phone className="h-5 w-5" /></span>
+              <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground">
+                <Phone className="h-5 w-5" />
+              </span>
               <div>
                 <p className="text-sm font-semibold">Telefon</p>
-                <p className="text-muted-foreground">{brand.phone}</p>
+                <a
+                  href={`tel:${brand.phone.replace(/\s/g, "")}`}
+                  className="text-primary hover:underline"
+                >
+                  {brand.phone}
+                </a>
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground"><MapPin className="h-5 w-5" /></span>
+              <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent text-accent-foreground">
+                <MapPin className="h-5 w-5" />
+              </span>
               <div>
                 <p className="text-sm font-semibold">Standort</p>
                 <p className="text-muted-foreground">{brand.address.label}</p>
@@ -67,11 +90,21 @@ function Page() {
             {sent ? (
               <div className="flex flex-col items-center py-10 text-center">
                 <CheckCircle2 className="h-12 w-12 text-secondary" />
-                <h2 className="mt-4 text-2xl font-bold">Danke für deine Nachricht!</h2>
-                <p className="mt-2 max-w-md text-muted-foreground">Wir melden uns schnellstmöglich bei dir.</p>
+                <h2 className="mt-4 text-2xl font-bold">
+                  Danke für deine Nachricht!
+                </h2>
+                <p className="mt-2 max-w-md text-muted-foreground">
+                  Wir melden uns schnellstmöglich bei dir.
+                </p>
               </div>
             ) : (
-              <form className="space-y-5" onSubmit={(e) => { e.preventDefault(); setSent(true); }}>
+              <form
+                className="space-y-5"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setSent(true);
+                }}
+              >
                 <div className="space-y-2">
                   <Label htmlFor="name">Name</Label>
                   <Input id="name" required />
@@ -84,7 +117,14 @@ function Page() {
                   <Label htmlFor="msg">Nachricht</Label>
                   <Textarea id="msg" rows={5} required />
                 </div>
-                <Button type="submit" variant="hero" size="lg" className="w-full">Nachricht senden</Button>
+                <Button
+                  type="submit"
+                  variant="hero"
+                  size="lg"
+                  className="w-full"
+                >
+                  Nachricht senden
+                </Button>
               </form>
             )}
           </div>

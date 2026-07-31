@@ -19,9 +19,22 @@ function Page() {
   return (
     <LegalPage title="Impressum" description="Angaben gemäß § 5 TMG.">
       <h2>Anbieter</h2>
-      <p>{brand.imprint.providerName}<br />{brand.address.street}<br />{brand.address.postalCode} {brand.address.city}</p>
+      <p>
+        {brand.imprint.providerName}
+        <br />
+        {brand.address.street}
+        <br />
+        {brand.address.postalCode} {brand.address.city}
+        <br />
+        {brand.address.country}
+      </p>
       <h2>Kontakt</h2>
-      <p>E-Mail: {brand.email}</p>
+      <p>
+        Telefon:{" "}
+        <a href={`tel:${brand.phone.replace(/\s/g, "")}`}>{brand.phone}</a>
+        <br />
+        E-Mail: <a href={`mailto:${brand.email}`}>{brand.email}</a>
+      </p>
       <h2>Verantwortlich für den Inhalt</h2>
       <p>{brand.imprint.responsiblePerson}, Anschrift wie oben.</p>
       {brand.imprint.disclaimer && (
